@@ -29,3 +29,44 @@ Originally forked from [YTMySubs v1.1.1](https://github.com/SeinopSys/YTMySubs) 
 ## License
 
 [MIT](LICENSE) — Copyright (c) 2015 David Joseph Guzsik (SeinopSys), 2026 Austin Wisniewski (curbthepain)
+
+## Contributors
+
+|
+[
+![SeinopSys
+](
+https://github.com/SeinopSys.png?size=60
+)
+](https://github.com/SeinopSys) 
+|
+[
+![curbthepain
+](
+https://github.com/curbthepain.png?size=60
+)
+](https://github.com/curbthepain) 
+|
+|
+:---:
+|
+:---:
+|
+|
+[
+SeinopSys
+](
+https://github.com/SeinopSys
+)
+|
+[
+curbthepain
+](
+https://github.com/curbthepain
+)
+|
+|
+ Original Creator 
+|
+ MV3 Rewrite 
+|

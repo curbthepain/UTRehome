@@ -32,41 +32,9 @@ Originally forked from [YTMySubs v1.1.1](https://github.com/SeinopSys/YTMySubs) 
 
 ## Contributors
 
-|
-[
-![SeinopSys
-](
-https://github.com/SeinopSys.png?size=60
-)
-](https://github.com/SeinopSys) 
-|
-[
-![curbthepain
-](
-https://github.com/curbthepain.png?size=60
-)
-](https://github.com/curbthepain) 
-|
-|
-:---:
-|
-:---:
-|
-|
-[
-SeinopSys
-](
-https://github.com/SeinopSys
-)
-|
-[
-curbthepain
-](
-https://github.com/curbthepain
-)
-|
-|
- Original Creator 
-|
- MV3 Rewrite 
-|
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/SeinopSys"><img src="https://github.com/SeinopSys.png?size=80" width="80" alt="SeinopSys"><br><b>SeinopSys</b></a><br>Original Creator</td>
+    <td align="center"><a href="https://github.com/curbthepain"><img src="https://github.com/curbthepain.png?size=80" width="80" alt="curbthepain"><br><b>curbthepain</b></a><br>MV3 Rewrite</td>
+  </tr>
+</table>

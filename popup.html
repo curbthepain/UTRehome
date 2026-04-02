@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-card">
+    <div class="popup-header">
+      <img src="icons/48.png" alt="" class="popup-icon">
+      <div class="popup-title">
+        <span class="popup-name">UTRehome</span>
+        <span class="popup-version" id="version"></span>
+      </div>
+    </div>
+    <div class="popup-status">
+      <span class="status-label">Current view:</span>
+      <span class="status-value" id="current-view">—</span>
+    </div>
+    <button class="refresh-btn" id="refresh-btn" title="Refresh subscriptions">
+      <svg class="refresh-icon" viewBox="0 0 24 24" width="18" height="18">
+        <path fill="currentColor" d="M17.65 6.35A7.96 7.96 0 0 0 12 4C7.58 4 4.01 7.58 4.01 12S7.58 20 12 20c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+      </svg>
+      <span>Refresh</span>
+    </button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

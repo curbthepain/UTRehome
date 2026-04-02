@@ -16,4 +16,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'setDefaultView') {
     chrome.storage.local.set({ defaultView: message.view });
   }
+  if (message.type === 'refreshSubscriptions') {
+    chrome.tabs.query({ url: '*://*.youtube.com/*' }, (tabs) => {
+      for (const tab of tabs) {
+        chrome.tabs.sendMessage(tab.id, { type: 'refreshSubscriptions' });
+      }
+      sendResponse({ ok: true });
+    });
+    return true; // async response
+  }
 });

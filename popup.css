@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  min-width: 240px;
+}
+
+.popup-card {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.popup-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.popup-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f0f0f;
+}
+
+.popup-version {
+  font-size: 12px;
+  color: #606060;
+}
+
+.popup-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.status-label {
+  color: #606060;
+}
+
+.status-value {
+  font-weight: 500;
+  color: #0f0f0f;
+  text-transform: capitalize;
+}
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 18px;
+  background: #cc0000;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.refresh-btn:hover {
+  background: #b30000;
+}
+
+.refresh-btn:active {
+  background: #990000;
+}
+
+.refresh-btn:disabled {
+  background: #ccc;
+  cursor: default;
+}
+
+.refresh-icon {
+  flex-shrink: 0;
+}

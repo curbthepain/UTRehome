@@ -18,6 +18,7 @@
     generation: 0,
     loading: false,
     injectedScript: false,
+    gridColumns: 4,
   };
 
   const CACHE_LIFETIME = 5 * 60 * 1000; // 5 minutes
@@ -452,6 +453,13 @@
 
   // ── Rendering ──────────────────────────────────────────────────────────
 
+  function applyGridColumns() {
+    const grid = document.querySelector('#utrehome-subscriptions');
+    if (grid) {
+      grid.style.gridTemplateColumns = `repeat(${state.gridColumns}, minmax(0, 1fr))`;
+    }
+  }
+
   function createToggle() {
     const toggle = document.createElement('div');
     toggle.id = 'utrehome-toggle';
@@ -466,13 +474,58 @@
     recBtn.dataset.view = 'recommended';
     recBtn.textContent = 'Recommended';
 
+    const rightGroup = document.createElement('div');
+    rightGroup.className = 'utrehome-toggle-right';
+
+    const gridPill = document.createElement('div');
+    gridPill.className = 'utrehome-grid-pill';
+
+    const gridDigit = document.createElement('span');
+    gridDigit.className = 'utrehome-grid-digit';
+    gridDigit.textContent = state.gridColumns;
+
+    const gridBtn = document.createElement('button');
+    gridBtn.className = 'utrehome-grid-btn';
+    gridBtn.title = 'Change grid columns';
+    gridBtn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M3 3h8v8H3V3zm0 10h8v8H3v-8zm10-10h8v8h-8V3zm0 10h8v8h-8v-8z"/></svg>';
+
+    gridPill.appendChild(gridDigit);
+    gridPill.appendChild(gridBtn);
+
+    const refreshBtn = document.createElement('button');
+    refreshBtn.className = 'utrehome-refresh-btn';
+    refreshBtn.title = 'Refresh subscriptions';
+    refreshBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M17.65 6.35A7.96 7.96 0 0 0 12 4C7.58 4 4.01 7.58 4.01 12S7.58 20 12 20c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>';
+
+    rightGroup.appendChild(gridPill);
+    rightGroup.appendChild(refreshBtn);
+
     toggle.appendChild(subsBtn);
     toggle.appendChild(recBtn);
+    toggle.appendChild(rightGroup);
 
     toggle.addEventListener('click', (e) => {
       const btn = e.target.closest('.utrehome-tab');
       if (!btn || btn.dataset.view === state.currentView) return;
       switchView(btn.dataset.view);
+    });
+
+    refreshBtn.addEventListener('click', () => {
+      state.cache.videos = [];
+      state.cache.continuationToken = null;
+      state.cache.fetchedAt = 0;
+      state.generation++;
+      if (state.currentView === 'subscriptions') {
+        loadSubscriptions();
+      }
+    });
+
+    gridBtn.addEventListener('click', () => {
+      const cycle = [3, 4, 5];
+      const idx = cycle.indexOf(state.gridColumns);
+      state.gridColumns = cycle[(idx + 1) % cycle.length];
+      gridDigit.textContent = state.gridColumns;
+      applyGridColumns();
     });
 
     return toggle;
@@ -619,12 +672,19 @@
       btn.classList.toggle('utrehome-tab--active', btn.dataset.view === view);
     });
 
+    // Collapse/expand grid pill based on view
+    const gridPill = document.querySelector('.utrehome-grid-pill');
+    if (gridPill) {
+      gridPill.classList.toggle('utrehome-grid-pill--collapsed', view !== 'subscriptions');
+    }
+
     if (view === 'subscriptions') {
       if (originalContents) originalContents.style.display = 'none';
       if (chipBar) chipBar.style.display = 'none';
       if (header) header.style.display = 'none';
       if (subsContainer) {
         subsContainer.style.display = '';
+        applyGridColumns();
         if (!state.cache.videos.length || isCacheStale()) {
           loadSubscriptions();
         }
@@ -878,6 +938,19 @@
       onLeaveHomePage();
     }
   }
+
+  // Listen for refresh message from popup via background
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.type === 'refreshSubscriptions' && state.isHomePage) {
+      state.cache.videos = [];
+      state.cache.continuationToken = null;
+      state.cache.fetchedAt = 0;
+      state.generation++;
+      if (state.currentView === 'subscriptions') {
+        loadSubscriptions();
+      }
+    }
+  });
 
   // Listen for YouTube SPA navigations
   document.addEventListener('yt-navigate-finish', checkPage);
